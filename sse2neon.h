@@ -4246,9 +4246,25 @@ FORCE_INLINE __m128d _mm_loadu_pd(const double *p)
 // Load 128-bits of integer data from memory into dst. mem_addr does not need to
 // be aligned on any particular boundary.
 // https://www.intel.com/content/www/us/en/docs/intrinsics-guide/index.html#text=_mm_loadu_si128
+
 FORCE_INLINE __m128i _mm_loadu_si128(const __m128i *p)
 {
     return vreinterpretq_m128i_s32(vld1q_s32((const int32_t *) p));
+}
+
+FORCE_INLINE __m128i old_mm_loadu_si128(const __m128i *p)
+{
+    return vreinterpretq_m128i_s32(vld1q_s32((const int32_t *) p));
+}
+
+#include "string.h"
+
+FORCE_INLINE __m128i new_mm_loadu_si128(const __m128i *p)
+{
+    int64x2_t res;
+    // res = vreinterpretq_s64_s32(vld1q_s32((const int32_t *) ptr));
+    memcpy(&res, (const int64_t *) p, sizeof(res));
+    return vreinterpretq_m128i_s64(res);
 }
 
 // Load unaligned 32-bit integer from memory into the first element of dst.
