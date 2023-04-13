@@ -4953,11 +4953,29 @@ result_t test_mm_loadu_pd(const SSE2NEONTestImpl &impl, uint32_t iter)
     return validateDouble(a, p[0], p[1]);
 }
 
+#include <stdio.h>
+#include <time.h>
 result_t test_mm_loadu_si128(const SSE2NEONTestImpl &impl, uint32_t iter)
 {
     const int32_t *_a = (const int32_t *) impl.mTestIntPointer1;
-    __m128i c = _mm_loadu_si128((const __m128i *) _a);
-    return VALIDATE_INT32_M128(c, _a);
+    const int test_times = 100000;
+
+    clock_t t;
+    double time_taken = 0;
+    t = clock();
+    for (int i = 0; i < test_times; i++) {
+        __m128i c = old_mm_loadu_si128((const __m128i *) _a+(i%8));
+    }
+    time_taken = ((double)t)/CLOCKS_PER_SEC;
+    printf("NEON implementation: %f\n", time_taken);
+
+    t = clock();
+    for (int i = 0; i < test_times; i++) {
+        __m128i c = new_mm_loadu_si128((const __m128i *) _a+(i%8));
+    }
+    time_taken = ((double)t)/CLOCKS_PER_SEC;
+    printf("memcpy implementation: %f\n", time_taken);;
+    return TEST_FAIL;
 }
 
 result_t test_mm_loadu_si32(const SSE2NEONTestImpl &impl, uint32_t iter)
