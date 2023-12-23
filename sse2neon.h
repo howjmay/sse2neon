@@ -2392,9 +2392,9 @@ FORCE_INLINE void _sse2neon_mm_set_flush_zero_mode(unsigned int flag)
 // Set packed single-precision (32-bit) floating-point elements in dst with the
 // supplied values.
 // https://www.intel.com/content/www/us/en/docs/intrinsics-guide/index.html#text=_mm_set_ps
-FORCE_INLINE __m128 _mm_set_ps(float w, float z, float y, float x)
+FORCE_INLINE __m128 _mm_set_ps(float z, float y, float x, float w)
 {
-    float ALIGN_STRUCT(16) data[4] = {x, y, z, w};
+    float ALIGN_STRUCT(16) data[4] = {w, x, y, z};
     return vreinterpretq_m128_f32(vld1q_f32(data));
 }
 

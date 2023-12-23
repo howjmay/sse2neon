@@ -2715,12 +2715,12 @@ result_t test_mm_set_flush_zero_mode(const SSE2NEONTestImpl &impl,
 
 result_t test_mm_set_ps(const SSE2NEONTestImpl &impl, uint32_t iter)
 {
-    float x = impl.mTestFloats[iter];
+    float z = impl.mTestFloats[iter];
     float y = impl.mTestFloats[iter + 1];
-    float z = impl.mTestFloats[iter + 2];
+    float x = impl.mTestFloats[iter + 2];
     float w = impl.mTestFloats[iter + 3];
-    __m128 a = _mm_set_ps(x, y, z, w);
-    return validateFloat(a, w, z, y, x);
+    __m128 a = _mm_set_ps(z, y, x, w);
+    return validateFloat(a, w, x, y, z);
 }
 
 result_t test_mm_set_ps1(const SSE2NEONTestImpl &impl, uint32_t iter)
