@@ -79,7 +79,7 @@ jobs:
           install: |
             apt-get update -q -y
             apt-get install -q -y "${{ matrix.cxx_compiler }}" make
-            apt-get install -q -y gcc
+            apt-get install -q -y gcc-13 g++-13
             apt-get install -q -y  debianutils
 
           run: |
