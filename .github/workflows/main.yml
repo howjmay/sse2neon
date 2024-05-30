@@ -84,7 +84,7 @@ jobs:
 
           run: |
             echo "===="
-            which g++-13
+            which $CXX
             echo "===="
             make FEATURE=${{ matrix.arch_with_features.feature }} check
 
