@@ -78,7 +78,8 @@ jobs:
             ARCH_CFLAGS: ${{ matrix.arch_with_features.arch_cflags }}
           install: |
             apt-get update -q -y
-            apt-get install -q -y "${{ matrix.cxx_compiler }}" make add-apt-repository
+            apt-get install -q -y "${{ matrix.cxx_compiler }}" make
+            apt install software-properties-common
             add-apt-repository ppa:ubuntu-toolchain-r/test
             apt-get install -q -y gcc-13 g++-13
             apt-get install -q -y  debianutils
