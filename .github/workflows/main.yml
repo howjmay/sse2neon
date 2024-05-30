@@ -85,7 +85,7 @@ jobs:
           run: |
             echo "===="
             echo ${{ matrix.cxx_compiler }}
-            apt-get install -q -y "${{ matrix.cxx_compiler }}
+            apt-get install -q -y "${{ matrix.cxx_compiler }}"
             ${{ matrix.cxx_compiler }} --version
             echo "===="
             make FEATURE=${{ matrix.arch_with_features.feature }} check
