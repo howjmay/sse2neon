@@ -52,7 +52,7 @@ jobs:
         run: mingw32-make check
 
   host-arm:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
         arch_with_features: [
@@ -61,7 +61,7 @@ jobs:
           {arch: aarch64, feature: crypto+crc, arch_cflags: none},
           {arch: armv7, feature: none, arch_cflags: '-mcpu=cortex-a32 -mfpu=neon-fp-armv8'}
         ]
-        cxx_compiler: [g++-10, clang++-11]
+        cxx_compiler: [g++-10, clang++-11, g++-13]
     steps:
       - name: checkout code
         uses: actions/checkout@v4
@@ -71,7 +71,7 @@ jobs:
         uses: uraimo/run-on-arch-action@v2.7.1
         with:
           arch: ${{ matrix.arch_with_features.arch }}
-          distro: ubuntu20.04
+          distro: ubuntu22.04
           env: |
             CXX: ${{ matrix.cxx_compiler }}
             ARCH_CFLAGS: ${{ matrix.arch_with_features.arch_cflags }}
