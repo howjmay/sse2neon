@@ -62,8 +62,8 @@ jobs:
           # {arch: armv7, feature: none, arch_cflags: '-mcpu=cortex-a32 -mfpu=neon-fp-armv8'}
         ]
         compiler: [ latest, gcc-latest, gcc-10, gcc-13, g++-13, clang, clang-13, clang++-12 ]
-        # cxx_compiler: [g++-10, clang++-11, g++-13]
-        cxx_compiler: [g++-13]
+        cxx_compiler: [g++-10, clang++-11, g++-13]
+        # cxx_compiler: [g++-13]
     steps:
       - name: checkout code
         uses: actions/checkout@v4
@@ -84,7 +84,7 @@ jobs:
             ARCH_CFLAGS: ${{ matrix.arch_with_features.arch_cflags }}
           install: |
             apt-get update -q -y
-            apt-get install -q -y "${{ matrix.cxx_compiler }}" make
+            apt-get install -y "${{ matrix.cxx_compiler }}" make
             # apt install -y software-properties-common
             # add-apt-repository ppa:ubuntu-toolchain-r/test
             # apt-get install -q -y gcc-13 g++-13
