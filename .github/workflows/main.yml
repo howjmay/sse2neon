@@ -70,7 +70,16 @@ jobs:
       - name: Install compiler
         id: install_cc
         uses: rlalik/setup-cpp-compiler@master
-
+        with:
+          compiler: ${{ matrix.compiler }}
+      - name: Check compiler
+        shell: bash
+        env:
+            CC: ${{ steps.install_cc.outputs.cc }}
+            CXX: ${{ steps.install_cc.outputs.cxx }}
+        run: |
+          $CC --version
+          $CXX --version
       - name: build artifact
         # The Github Action for non-x86 CPU
         # https://github.com/uraimo/run-on-arch-action
@@ -79,8 +88,8 @@ jobs:
           arch: ${{ matrix.arch_with_features.arch }}
           distro: ubuntu22.04
           env: |
-            CC: ${{ steps.install_cc.outputs.cc }}
-            CXX: ${{ steps.install_cc.outputs.cxx }}
+            # CC: ${{ steps.install_cc.outputs.cc }}
+            # CXX: ${{ steps.install_cc.outputs.cxx }}
             ARCH_CFLAGS: ${{ matrix.arch_with_features.arch_cflags }}
           install: |
             apt-get update -q -y
