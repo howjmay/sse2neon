@@ -96,6 +96,7 @@ jobs:
             # apt-get install -y "${{ matrix.cxx_compiler }}"
             echo "++++"
             # CC --version
+            echo ${{ steps.install_cc.outputs.cc }}
             # ${{ matrix.cxx_compiler }} --version
             echo "===="
             make FEATURE=${{ matrix.arch_with_features.feature }} check
