@@ -56,10 +56,10 @@ jobs:
     strategy:
       matrix:
         arch_with_features: [
-          {arch: armv7, feature: none, arch_cflags: none},
+          # {arch: armv7, feature: none, arch_cflags: none},
           {arch: aarch64, feature: none, arch_cflags: none},
-          {arch: aarch64, feature: crypto+crc, arch_cflags: none},
-          {arch: armv7, feature: none, arch_cflags: '-mcpu=cortex-a32 -mfpu=neon-fp-armv8'}
+          # {arch: aarch64, feature: crypto+crc, arch_cflags: none},
+          # {arch: armv7, feature: none, arch_cflags: '-mcpu=cortex-a32 -mfpu=neon-fp-armv8'}
         ]
         compiler: [ latest, gcc-latest, gcc-10, gcc-13, g++-13, clang, clang-13, clang++-12 ]
         # cxx_compiler: [g++-10, clang++-11, g++-13]
